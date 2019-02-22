@@ -6,9 +6,9 @@ has to be delivered in a standard, cross-platform format.
 
 ## Project
 
-Name:
+Name: Apache Samza
 
-URL:
+URL: https://github.com/apache/samza
 
 One or two sentences describing it
 
@@ -16,9 +16,9 @@ One or two sentences describing it
 
 ## Selected issue(s)
 
-Title:
+Title: Refactor TaskContextImpl to not include access to objects that are only used internally
 
-URL:
+URL: https://issues.apache.org/jira/browse/SAMZA-1935
 
 Summary in one or two sentences
 
