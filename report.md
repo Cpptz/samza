@@ -10,8 +10,9 @@ Name: Apache Samza
 
 URL: https://github.com/apache/samza
 
-One or two sentences describing it
-
+Apache Samza is a distributed stream processing framework. It is a scalable data processing engine that allows
+ you to process and analyze your data in real-time. 
+    
 ## Architectural overview (optional, as one item for P+)
 
 ## Selected issue(s)
@@ -20,16 +21,23 @@ Title: Refactor TaskContextImpl to not include access to objects that are only u
 
 URL: https://issues.apache.org/jira/browse/SAMZA-1935
 
-Summary in one or two sentences
+TaskContext should be a public API but TaskContextImpl is being used to pass around objects for internal use. Some 
+internal components cast TaskContext to a TaskContextImpl to access these objects, which is not ideal.
 
 ## Onboarding experience
 
 Did it build as documented?
+
+In the README.md it clearly states how to build the project and run tests using gradle. The project is built using
+ Scala and YARN. The build concluded without errors for most of the group members.
     
 (See the assignment for details; if everything works out of the box,
 there is no need to write much here.)
 
 ## Requirements affected by functionality being refactored
+
+We need to split up the internal functionality by creating a separate object which is only passed around internally 
+and is decoupled from TaskContextImpl.
 
 ## Existing test cases relating to refactored code
 
