@@ -47,21 +47,90 @@ The refactoring itself is documented by the git log.
 
 For each team member, how much time was spent in
 
-1. plenary discussions/meetings;
-
-2. discussions within parts of the group;
-
-3. reading documentation;
-
-4. configuration;
-
-5. analyzing code/output;
-
-6. writing documentation;
-
-7. writing code;
-
-8. running code?
+* Viktor 
+    1. plenary discussions/meetings;
+    
+    2. discussions within parts of the group;
+    
+    3. reading documentation;
+    
+    4. configuration;
+    
+    5. analyzing code/output;
+    
+    6. writing documentation;
+    
+    7. writing code;
+    
+    8. running code?
+    
+* Cyril 
+    1. plenary discussions/meetings;
+    
+    2. discussions within parts of the group;
+    
+    3. reading documentation;
+    
+    4. configuration;
+    
+    5. analyzing code/output;
+    
+    6. writing documentation;
+    
+    7. writing code;
+    
+    8. running code?
+    
+* Robin 
+    1. plenary discussions/meetings;
+    
+    2. discussions within parts of the group;
+    
+    3. reading documentation;
+    
+    4. configuration;
+    
+    5. analyzing code/output;
+    
+    6. writing documentation;
+    
+    7. writing code;
+    
+    8. running code?
+    
+* Sara 
+    1. plenary discussions/meetings;
+    
+    2. discussions within parts of the group;
+    
+    3. reading documentation;
+    
+    4. configuration;
+    
+    5. analyzing code/output;
+    
+    6. writing documentation;
+    
+    7. writing code;
+    
+    8. running code?
+    
+* Fredrik 
+    1. plenary discussions/meetings;
+    
+    2. discussions within parts of the group;
+    
+    3. reading documentation;
+    
+    4. configuration;
+    
+    5. analyzing code/output;
+    
+    6. writing documentation;
+    
+    7. writing code;
+    
+    8. running code?
 
 ## Overall experience
 
