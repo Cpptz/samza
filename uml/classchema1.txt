@@ -1,0 +1,9 @@
+@startuml
+Interface TaskContext
+Interface Context
+Context <|-- ContextImpl
+TaskContext <|-- TaskContextImpl
+
+
+ContextImpl -|> TaskContextImpl
+@enduml
