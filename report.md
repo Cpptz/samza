@@ -26,13 +26,13 @@ internal components cast TaskContext to a TaskContextImpl to access these object
 
 ## Onboarding experience
 
-Did it build as documented?
+The onboarding documentation is actually very good in this project and can be found in the README.md. We did not have to search for information on a different place to be able to build the project and run tests using gradle.
+Gradle was a required tool to build the project. The project specified commands for building the project using gradle as well as where to download gradle if you don’t have it on your local machine.
 
-In the README.md it clearly states how to build the project and run tests using gradle. The project is built using
- Scala and YARN. The build concluded without errors for most of the group members.
-    
-(See the assignment for details; if everything works out of the box,
-there is no need to write much here.)
+Samza integrates with YARN for dependency management and running stream-processing as a managed service. Samza works with YARN to distribute resources and it also handles failures of individual instances and automatically restarts them. And scala is a programming language that combines an object oriented approach and functional programming into one high level programming language.
+
+The build as well as the tests conclude without any errors.
+
 
 ## Requirements affected by functionality being refactored
 
