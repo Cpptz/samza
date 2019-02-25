@@ -28,6 +28,10 @@ Samza also guarantees that even if your job crashes, the machine dies, there is 
 
 Each Samza task is associated with its own instance of a local database (state-store) which allows tasks to be relocated without affecting the overall application. 
 
+Sources
+* http://samza.apache.org/learn/documentation/1.0.0/core-concepts/core-concepts.html
+* http://samza.apache.org/learn/documentation/1.0.0/architecture/architecture-overview.html
+
 ## Selected issue(s)
 
 Title: Refactor TaskContextImpl to not include access to objects that are only used internally
