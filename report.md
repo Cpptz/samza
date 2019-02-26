@@ -53,14 +53,68 @@ The build as well as the tests conclude without any errors.
 
 ## Requirements affected by functionality being refactored
 
-We need to split up the internal functionality by creating a separate object which is only passed around internally 
-and is decoupled from TaskContextImpl.
+TaskContextImpl was split up by creating a separate object to decouple internally passed around objects from API. 
+
+We created the helper class JobContextMetadata to pass operators internally. 
+
+|  Name | JobContextMetadata | 
+|---|---|
+|Title| Fetching and assigning register objects|
+|Description| A helper class needed to pass operators internally.|
+
+|  Name | registerObject() | 
+|---|---|
+|Title| register object to registry |
+|Description| Takes a string and a object and writes it into the object registry |
+
+|  Name | fetchObject | 
+|---|---|
+|Title| fetches object from registry|
+|Description| Takes a string and object and returns the object from registry|
+
+|  Name | getJobModel | 
+|---|---|
+|Title| gets job model |
+|Description| returns the job model|
+
+|  Name | getStreamMetadataCache | 
+|---|---|
+|Title|get streamMetadataCache|
+|Description| returns streamMetadataCache|
+
+|  Name | TaskContextImpl | 
+|---|---|
+|Title| Gets context and shares it to all tasks within the container |
+|Description| Moved registerObject and fetchObject to not include access to object that are only used internally. getJobModel and getStreamMetadataCache is kept in TaskContextImpl in order to pass them on in the constructor of JobContextMetadata|
 
 ## Existing test cases relating to refactored code
+Firstly we added a new class `JobContextMetaData` to lift out some functionality from the class `TaskContextImpl`. Then we had to move the testing of this functionality from `TestTaskContextImpl` to a new testclass `TestJobContextMetaData`. In the new testclass, we test to register and fetch an object. So we register an object with a specific key, and we test so that we can fetch this object with that specific key. We also test so that the fetch function returns null if there is no key attached to an object.
+
+We have changed a bit to `TestOperatorImpl`. The context contains `TaskContextImpl` but since we lifted out functionality from the `TaskContextImpl` we had to add this back to the test. We did this by initiating a new `JobContextMetaData` which contains the functionality that we lifted out. So whenever we initiialize the context, we also initialize the JobContextMetaData. The reason why we create the `JobContextMetaData` with null arguments is that before, the testcase used a mock of `TaskContextImpl` without mocking the getters and the getters are obviously not used in this testcase.
+
+The last test we changed was in the `TestWindowOperator` testclass. The reason we changed this was that the mock was not necessary to test this functionality. Before, it worked like this. They initialized their testattributes with some key k1 and tried to retrieve the value with key k2 which does not work, so instead they mocked the fetch object method to pass the test. Now, we have changed the test so that we initialize the test attributes with correct attributes so that we dont need to mock the fetch object method.
+
+To run those three tests, use the following command line:
+```bash
+./gradlew clean :samza-core:test -Dtest.single=TestJobContextMetadata
+./gradlew clean :samza-core:test -Dtest.single=TestOperatorImpl
+./gradlew clean :samza-core:test -Dtest.single=TestTaskContextImpl
+```
+
 
 ## The refactoring carried out
+Before the refactoring a [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object was given as input to the init method in [OperatorImpl](./samza-core/src/main/java/org/apache/samza/operators/impl/OperatorImpl.java). On this object the method getTaskContext was called which returned a [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) object. This object was then casted to a [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java) object to be able to use four methods in [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java). This methods do not belong to the public interface and are only used internally, which makes them unfit for [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java). A new class, called [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) was created, with some of the attributes and methods from [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java). The attributes [JobModel](./samza-core/src/main/java/org/apache/samza/job/model/JobModel.java), [StreamMetadataCache](./samza-core/src/main/scala/org/apache/samza/system/StreamMetadataCache.scala) and Map<String, Object>, and the methods registerObject and fetchObject were moved. 
 
 
+
+The class [EmbeddedTaggedRateLimiter](./samza-core/src/main/java/org/apache/samza/util/EmbeddedTaggedRateLimiter.java) implements the public API [RateLimiter](./samza-api/src/main/java/org/apache/samza/util/RateLimiter.java), which has a method called init with a [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object as inparameter. This means that the [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object is the only source from which the [JobModel](./samza-core/src/main/java/org/apache/samza/job/model/JobModel.java) and the [StreamMetadataCache](./samza-core/src/main/scala/org/apache/samza/system/StreamMetadataCache.scala) can be fetched. Hence, the methods getJobModel and getStreamMetadataCache are needed outside of [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java). Therefore only copies of these methods were moved to [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java).
+
+After the refactoring the init method takes a [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object and a [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) object as input, creates a [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) object from the [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) but uses it for less calls than before. Now the [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) object is used when calling fetchObject and getStreamMetadataCache instead. The major difference however is that the [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) object received when calling getTaskContext on the [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object does not have to be casted to a [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java) object.
+
+The patch can be viewed using the following command line: 
+```bash
+git diff master..testing
+```
 
 ### Before
 ![](./images/before_class.png)
@@ -87,96 +141,94 @@ The refactoring itself is documented by the git log.
 For each team member, how much time was spent in
 
 * Viktor 
-    1. plenary discussions/meetings;
+    1. Plenary discussions/meetings:
     
-    2. discussions within parts of the group;
+    2. Choosing project:
     
-    3. reading documentation;
+    3. Reading documentation:
     
-    4. configuration;
+    4. Setting up environment:
     
-    5. analyzing code/output;
+    5. Analyzing code:
     
-    6. writing documentation;
+    6. Writing documentation:
     
-    7. writing code;
-    
-    8. running code?
+    7. Writing code:
     
 * Cyril 
-    1. plenary discussions/meetings;
+    1. Plenary discussions/meetings:
     
-    2. discussions within parts of the group;
+    2. Choosing project:
     
-    3. reading documentation;
+    3. Reading documentation:
     
-    4. configuration;
+    4. Setting up environment:
     
-    5. analyzing code/output;
+    5. Analyzing code:
     
-    6. writing documentation;
+    6. Writing documentation:
     
-    7. writing code;
-    
-    8. running code?
+    7. Writing code:
     
 * Robin 
-    1. plenary discussions/meetings;
+    1. Plenary discussions/meetings: 10
     
-    2. discussions within parts of the group;
+    2. Choosing project: 8
     
-    3. reading documentation;
+    3. Reading documentation: 2
     
-    4. configuration;
+    4. Setting up environment: 1
     
-    5. analyzing code/output;
+    5. Analyzing code: 5
     
-    6. writing documentation;
+    6. Writing documentation: 3
     
-    7. writing code;
-    
-    8. running code?
+    7. Writing code: 1
     
 * Sara 
-    1. plenary discussions/meetings;
+    1. Plenary discussions/meetings:
     
-    2. discussions within parts of the group;
+    2. Choosing project:
     
-    3. reading documentation;
+    3. Reading documentation:
     
-    4. configuration;
+    4. Setting up environment:
     
-    5. analyzing code/output;
+    5. Analyzing code:
     
-    6. writing documentation;
+    6. Writing documentation:
     
-    7. writing code;
-    
-    8. running code?
+    7. Writing code:
     
 * Fredrik 
-    1. plenary discussions/meetings;
+    1. Plenary discussions/meetings:
     
-    2. discussions within parts of the group;
+    2. Choosing project:
     
-    3. reading documentation;
+    3. Reading documentation:
     
-    4. configuration;
+    4. Setting up environment:
     
-    5. analyzing code/output;
+    5. Analyzing code:
     
-    6. writing documentation;
+    6. Writing documentation:
     
-    7. writing code;
-    
-    8. running code?
+    7. Writing code:
 
 ## Overall experience
-Finding a suitable project that seemed doable was not a trivial task. After finding the Samza project and building it, understanding the project and the requirements of the refactoring was quite a challenge. We spent a lot of time as a group discussing how to best approach the problem and if our proposed solutions would work. We learnt that a seemingly trivial refactoring problem could in fact be much harder than it looked in the beginning. More time that expected was spent trying to find a solution without any code being written. Furthermore we learned that additional dependencies could be found within our project which would further complicate the refactoring. The experience of the given documentation was overall good, for example it was easy to build the project based on the documentation in the README.md. If anything was unclear, additional information could be found on their website: http://samza.apache.org/ 
+Finding a suitable project that seemed doable was not a trivial task. After finding the Samza project and building it, understanding the project and the requirements of the refactoring was quite a challenge. 
+We spent a lot of time as a group discussing how to best approach the problem and if our proposed solutions would work. We learnt that a seemingly trivial refactoring problem could in fact be much harder than it looked in the beginning. More time that expected was spent trying to find a solution without any code being written. 
+
+Furthermore we learned that additional dependencies could be found within our project which would further complicate the refactoring. The experience of the given documentation was overall good, for example it was easy to build the project based on the documentation in the README.md. If anything was unclear, additional information could be found on their website: http://samza.apache.org/ 
+
 We reached out to the community of the project in order to register as an assignee and within a day we were able to connect with the issue reporter (Cameron Lee). He seemed glad that we showed interest in the project and referred to Yi Pan who was able to register us on the project. The conversation can be found in the comment section: https://issues.apache.org/jira/browse/SAMZA-1935
 
-What are your main take-aways from this project? What did you learn?
-Is there something special you want to mention here?
+As for the refactoring, it was hard for all of us to work on the refactoring since it was only a few functions that needed to be moved in order to get the refaction to work. All of us put a lot of work into gathering knowledge about the project and how to do the refactoring, but we couldn't devide the actual refactoring.
+
+We learned that we probably should have gotten a larger refactoring project, but it's hard to get a view of how big a task is before you've spent a few hours looking into it. And that is something we didn't have time to do for several projects. 
+If we did, we'd probably still be reading through projects as we speak.
+
+
 
 Fredrik:
 
@@ -186,5 +238,4 @@ Sara:
 
 Cyril:
 
-Robin:
-
+Robin: I've learned it takes a long time to find a suitable project for this kind of task. There is a lot of code to read to get up to speed and realize how big the task actually is.
