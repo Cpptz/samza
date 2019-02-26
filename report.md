@@ -52,48 +52,16 @@ The build as well as the tests conclude without any errors.
 
 
 ## Requirements affected by functionality being refactored
-TaskContextImpl was split up by creating a separate object to decouple internally passed around objects from API. 
 
-We created the helper class JobContextMetadata to pass operators internally. 
-
-|  Name | JobContextMetadata | 
-|---|---|
-|Title| Fetching and assigning register objects|
-|Description| A helper class needed to pass operators internally.|
-
-|  Name | registerObject() | 
-|---|---|
-|Title| register object to registry |
-|Description| Takes a string and a object and writes it into the object registry |
-
-|  Name | fetchObject | 
-|---|---|
-|Title| fetches object from registry|
-|Description| Takes a string and object and returns the object from registry|
-
-|  Name | getJobModel | 
-|---|---|
-|Title| gets job model |
-|Description| returns the job model|
-
-|  Name | getStreamMetadataCache | 
-|---|---|
-|Title|get streamMetadataCache|
-|Description| returns streamMetadataCache|
-
-|  Name | TaskContextImpl | 
-|---|---|
-|Title| Gets context and shares it to all tasks within the container |
-|Description| Moved registerObject and fetchObject to not include access to object that are only used internally. getJobModel and getStreamMetadataCache is kept in TaskContextImpl in order to pass them on in the constructor of JobContextMetadata|
-
-
+We need to split up the internal functionality by creating a separate object which is only passed around internally 
+and is decoupled from TaskContextImpl.
 
 ## Existing test cases relating to refactored code
 
 ## The refactoring carried out
-Before the refactoring a Context object was given as input to the init method in the OperatorImpl class. On this object the method getTaskContext was called which returned a TaskContext object. This object was then casted to a TaskContextImpl object to be able to use four methods in the TaskContextImpl class. This methods do not belong to the public interface and are only used internally, which makes them unfit for the TaskContextImpl class. A new class, called JobContextMetaData was created, with some of the attributes and methods from the TaskContextImpl class. The attributes JobModel, StreamMetadataCache and Map<String, Object>, and the methods registerObject and fetchObject were moved. Creating a Context object requires the attributes JobModel and StreamMetadataCache. This means that the methods getJobModel and getStreamMetadataCache still are needed outside of the JobContextMetadata class. Therefore only copies of these methods were moved to [JobContextMetadata](./samza/samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java)
+Before the refactoring a [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object was given as input to the init method in [OperatorImpl](./samza-core/src/main/java/org/apache/samza/operators/impl/OperatorImpl.java). On this object the method getTaskContext was called which returned a [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) object. This object was then casted to a [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java) object to be able to use four methods in [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java). This methods do not belong to the public interface and are only used internally, which makes them unfit for [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java). A new class, called [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) was created, with some of the attributes and methods from [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java). The attributes JobModel, StreamMetadataCache and Map<String, Object>, and the methods registerObject and fetchObject were moved. Creating a [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object requires the attributes JobModel and StreamMetadataCache. This means that the methods getJobModel and getStreamMetadataCache still are needed outside of [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java). Therefore only copies of these methods were moved to [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java)
 
-After the refactoring the init method takes a Context object and a JobContextMetadata object as input, creates a TaskContext object from the context but uses it for less calls than before. Now the JobContextMetadata object is used when calling fetchObject and getStreamMetadataCache instead. The major difference however is that the TaskContext object received when calling getTaskContext on the Context object does not have to be casted to a TaskContextImpl object.
+After the refactoring the init method takes a [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object and a [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) object as input, creates a [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) object from the [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) but uses it for less calls than before. Now the [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) object is used when calling fetchObject and getStreamMetadataCache instead. The major difference however is that the [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) object received when calling getTaskContext on the [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object does not have to be casted to a [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java) object.
 
 
 ### Before
