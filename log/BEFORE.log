@@ -1,0 +1,393 @@
+To honour the JVM settings for this build a new JVM will be forked. Please consider using the daemon: https://docs.gradle.org/2.8/userguide/gradle_daemon.html.
+:clean UP-TO-DATE
+:samza-api:clean
+:samza-autoscaling_2.11:clean UP-TO-DATE
+:samza-aws_2.11:clean UP-TO-DATE
+:samza-azure_2.11:clean UP-TO-DATE
+:samza-core_2.11:clean
+:samza-elasticsearch_2.11:clean UP-TO-DATE
+:samza-hdfs_2.11:clean UP-TO-DATE
+:samza-kafka_2.11:clean UP-TO-DATE
+:samza-kv-inmemory_2.11:clean UP-TO-DATE
+:samza-kv-rocksdb_2.11:clean UP-TO-DATE
+:samza-kv_2.11:clean UP-TO-DATE
+:samza-log4j2_2.11:clean UP-TO-DATE
+:samza-log4j_2.11:clean UP-TO-DATE
+:samza-rest_2.11:clean UP-TO-DATE
+:samza-shell:clean UP-TO-DATE
+:samza-sql-shell_2.11:clean UP-TO-DATE
+:samza-sql_2.11:clean UP-TO-DATE
+:samza-test_2.11:clean UP-TO-DATE
+:samza-tools_2.11:clean UP-TO-DATE
+:samza-yarn_2.11:clean UP-TO-DATE
+:samza-api:compileJavaNote: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-api:processResources UP-TO-DATE
+:samza-api:classes
+:samza-api:compileTestJavaNote: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-api:processTestResources UP-TO-DATE
+:samza-api:testClasses
+:samza-api:test
+:samza-api:jar
+:samza-core_2.11:compileJava UP-TO-DATE
+:samza-core_2.11:compileScala
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-core/src/main/scala/org/apache/samza/container/SamzaContainer.scala:289: warning: non-variable type argument Any in type org.apache.samza.serializers.NoOpSerde[Any] is unchecked since it is eliminated by erasure
+[ant:scalac]             .filter(!_.isInstanceOf[NoOpSerde[Any]])
+[ant:scalac]                                    ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-core/src/main/scala/org/apache/samza/container/SamzaContainer.scala:308: warning: non-variable type argument Any in type org.apache.samza.serializers.NoOpSerde[Any] is unchecked since it is eliminated by erasure
+[ant:scalac]             .filter(!_.isInstanceOf[NoOpSerde[Any]])
+[ant:scalac]                                    ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-core/src/main/scala/org/apache/samza/container/TaskInstance.scala:74: warning: trait ClosableTask in package task is deprecated: see corresponding Javadoc for more information.
+[ant:scalac]   val isClosableTask = task.isInstanceOf[ClosableTask]
+[ant:scalac]                                          ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-core/src/main/scala/org/apache/samza/container/TaskInstance.scala:289: warning: trait ClosableTask in package task is deprecated: see corresponding Javadoc for more information.
+[ant:scalac]     if (task.isInstanceOf[ClosableTask]) {
+[ant:scalac]                           ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-core/src/main/scala/org/apache/samza/container/TaskInstance.scala:292: warning: trait ClosableTask in package task is deprecated: see corresponding Javadoc for more information.
+[ant:scalac]       task.asInstanceOf[ClosableTask].close
+[ant:scalac]                         ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-core/src/main/scala/org/apache/samza/checkpoint/OffsetManager.scala:352: warning: method onCheckpoint in trait CheckpointListener is deprecated: see corresponding Javadoc for more information.
+[ant:scalac]           checkpointListeners.get(systemName).foreach(_.onCheckpoint(offsets.asJava))
+[ant:scalac]                                                         ^
+[ant:scalac] 6 warnings found
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+:samza-core_2.11:processResources UP-TO-DATE
+:samza-core_2.11:classes
+:samza-core_2.11:jar
+:samza-autoscaling_2.11:compileJava UP-TO-DATE
+:samza-autoscaling_2.11:compileScala
+:samza-autoscaling_2.11:processResources UP-TO-DATE
+:samza-autoscaling_2.11:classes
+:samza-autoscaling_2.11:compileTestJava UP-TO-DATE
+:samza-autoscaling_2.11:compileTestScala
+[ant:scalac] Element '/home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-autoscaling/build/resources/main' does not exist.
+:samza-autoscaling_2.11:processTestResources
+:samza-autoscaling_2.11:testClasses
+:samza-autoscaling_2.11:test
+:samza-aws_2.11:compileJava
+:samza-aws_2.11:processResources UP-TO-DATE
+:samza-aws_2.11:classes
+:samza-aws_2.11:compileTestJava
+:samza-aws_2.11:processTestResources UP-TO-DATE
+:samza-aws_2.11:testClasses
+:samza-aws_2.11:test
+:samza-azure_2.11:compileJavaNote: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-azure/src/main/java/org/apache/samza/coordinator/AzureJobCoordinator.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-azure_2.11:processResources UP-TO-DATE
+:samza-azure_2.11:classes
+:samza-azure_2.11:compileTestJavaNote: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-azure/src/test/java/org/apache/samza/system/eventhub/TestMetricsRegistry.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-azure_2.11:processTestResources
+:samza-azure_2.11:testClasses
+:samza-azure_2.11:test
+:samza-core_2.11:compileTestJava UP-TO-DATE
+:samza-core_2.11:compileTestScala
+[ant:scalac] Element '/home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-core/build/resources/main' does not exist.
+[ant:scalac] Element '/home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-api/build/resources/test' does not exist.
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+:samza-core_2.11:processTestResources
+:samza-core_2.11:testClasses
+:samza-core_2.11:testException in thread "DisconnectableInputStream source reader" org.gradle.api.UncheckedIOException: java.io.IOException: Ressource temporairement non disponible
+	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:43)
+	at org.gradle.util.DisconnectableInputStream$1.run(DisconnectableInputStream.java:125)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.io.IOException: Ressource temporairement non disponible
+	at java.io.FileInputStream.readBytes(Native Method)
+	at java.io.FileInputStream.read(FileInputStream.java:255)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:286)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at org.gradle.util.DisconnectableInputStream$1.run(DisconnectableInputStream.java:96)
+	... 1 more
+
+:samza-elasticsearch_2.11:compileJava
+:samza-elasticsearch_2.11:processResources UP-TO-DATE
+:samza-elasticsearch_2.11:classes
+:samza-elasticsearch_2.11:compileTestJava
+:samza-elasticsearch_2.11:processTestResources UP-TO-DATE
+:samza-elasticsearch_2.11:testClasses
+:samza-elasticsearch_2.11:test
+:samza-yarn_2.11:compileJava UP-TO-DATE
+:samza-yarn_2.11:compileScalaNote: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-yarn/src/main/java/org/apache/samza/job/yarn/YarnClusterResourceManager.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-yarn_2.11:processResources
+:samza-yarn_2.11:classes
+:samza-yarn_2.11:lesscss
+:samza-yarn_2.11:jar
+:samza-hdfs_2.11:compileJava UP-TO-DATE
+:samza-hdfs_2.11:compileScala
+:samza-hdfs_2.11:processResources UP-TO-DATE
+:samza-hdfs_2.11:classes
+:samza-hdfs_2.11:compileTestJavaNote: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-hdfs/src/test/java/org/apache/samza/system/hdfs/reader/TestAvroFileHdfsReader.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+:samza-hdfs_2.11:compileTestScala
+[ant:scalac] Element '/home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-hdfs/build/resources/main' does not exist.
+Note: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-hdfs/src/test/java/org/apache/samza/system/hdfs/reader/TestAvroFileHdfsReader.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+:samza-hdfs_2.11:processTestResources
+:samza-hdfs_2.11:testClasses
+:samza-hdfs_2.11:test
+:samza-kafka_2.11:compileJava UP-TO-DATE
+:samza-kafka_2.11:compileScala
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/KafkaSystemFactory.scala:172: warning: postfix operator getJobId should be enabled
+[ant:scalac] by making the implicit value scala.language.postfixOps visible.
+[ant:scalac] This can be achieved by adding the import clause 'import scala.language.postfixOps'
+[ant:scalac] or by setting the compiler option -language:postfixOps.
+[ant:scalac] See the Scaladoc for value scala.language.postfixOps for a discussion
+[ant:scalac] why the feature should be explicitly enabled.
+[ant:scalac]     new JobConfig(config)getJobId)
+[ant:scalac]                          ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/util/ClientUtilTopicMetadataStore.scala:32: warning: object ClientUtils in package client is deprecated: This class has been deprecated and will be removed in a future release.
+[ant:scalac]   val brokers = ClientUtils.parseBrokerList(brokersListString)
+[ant:scalac]                 ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/util/ClientUtilTopicMetadataStore.scala:39: warning: object ClientUtils in package client is deprecated: This class has been deprecated and will be removed in a future release.
+[ant:scalac]     val response: TopicMetadataResponse = ClientUtils.fetchTopicMetadata(topics, brokers, clientId, timeout, currCorrId)
+[ant:scalac]                                           ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/BrokerProxy.scala:51: warning: object ConsumerConfig in package consumer is deprecated: This object has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac]   val timeout: Int = ConsumerConfig.SocketTimeout,
+[ant:scalac]                      ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/BrokerProxy.scala:52: warning: object ConsumerConfig in package consumer is deprecated: This object has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac]   val bufferSize: Int = ConsumerConfig.SocketBufferSize,
+[ant:scalac]                         ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/BrokerProxy.scala:54: warning: object ConsumerConfig in package consumer is deprecated: This object has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac]   val consumerMinSize:Int = ConsumerConfig.MinFetchBytes,
+[ant:scalac]                             ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/BrokerProxy.scala:55: warning: object ConsumerConfig in package consumer is deprecated: This object has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac]   val consumerMaxWait:Int = ConsumerConfig.MaxFetchWaitMs,
+[ant:scalac]                             ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/DefaultFetchSimpleConsumer.scala:32: warning: class SimpleConsumer in package consumer is deprecated: This class has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.KafkaConsumer instead.
+[ant:scalac]   extends SimpleConsumer(host, port, soTimeout, bufferSize, clientId) {
+[ant:scalac]           ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/DefaultFetchSimpleConsumer.scala:31: warning: object ConsumerConfig in package consumer is deprecated: This object has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac]   minBytes: Int = ConsumerConfig.MinFetchBytes, maxWait: Int = ConsumerConfig.MaxFetchWaitMs)
+[ant:scalac]                   ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/DefaultFetchSimpleConsumer.scala:31: warning: object ConsumerConfig in package consumer is deprecated: This object has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac]   minBytes: Int = ConsumerConfig.MinFetchBytes, maxWait: Int = ConsumerConfig.MaxFetchWaitMs)
+[ant:scalac]                                                                ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/DefaultFetchSimpleConsumer.scala:35: warning: class FetchRequestBuilder in package api is deprecated: This class has been deprecated and will be removed in a future release.
+[ant:scalac]     val fbr = new FetchRequestBuilder().maxWait(maxWait)
+[ant:scalac]                   ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/DefaultFetchSimpleConsumer.scala:48: warning: class FetchRequest in package api is deprecated: This class has been deprecated and will be removed in a future release.
+[ant:scalac]   override def fetch(request: FetchRequest): FetchResponse = super.fetch(request)
+[ant:scalac]                               ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/DefaultFetchSimpleConsumer.scala:65: warning: object ConsumerConfig in package consumer is deprecated: This object has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac] case class StreamFetchSizes(defaultValue: Int = ConsumerConfig.MaxFetchSize, streamValue: Map[String, Int] = Map[String, Int]())
+[ant:scalac]                                                 ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/KafkaSystemAdmin.scala:135: warning: object ConsumerConfig in package consumer is deprecated: This object has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac]   bufferSize: Int = ConsumerConfig.SocketBufferSize,
+[ant:scalac]                     ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/KafkaSystemAdmin.scala:267: warning: class SimpleConsumer in package consumer is deprecated: This class has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.KafkaConsumer instead.
+[ant:scalac]           val consumer = new SimpleConsumer(broker.host, broker.port, timeout, bufferSize, clientId)
+[ant:scalac]                              ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/KafkaSystemAdmin.scala:352: warning: class SimpleConsumer in package consumer is deprecated: This class has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.KafkaConsumer instead.
+[ant:scalac]   private def getOffsets(consumer: SimpleConsumer, topicsAndPartitions: Set[TopicAndPartition], earliestOrLatest: Long) = {
+[ant:scalac]                                    ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/KafkaSystemConsumer.scala:69: warning: object ConsumerConfig in package consumer is deprecated: This object has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac]   timeout: Int = ConsumerConfig.ConsumerTimeoutMs,
+[ant:scalac]                  ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/KafkaSystemConsumer.scala:70: warning: object ConsumerConfig in package consumer is deprecated: This object has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac]   bufferSize: Int = ConsumerConfig.SocketBufferSize,
+[ant:scalac]                     ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/KafkaSystemConsumer.scala:72: warning: object ConsumerConfig in package consumer is deprecated: This object has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac]   consumerMinSize: Int = ConsumerConfig.MinFetchBytes,
+[ant:scalac]                          ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/system/kafka_deprecated/KafkaSystemConsumer.scala:73: warning: object ConsumerConfig in package consumer is deprecated: This object has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac]   consumerMaxWait: Int = ConsumerConfig.MaxFetchWaitMs,
+[ant:scalac]                          ^
+[ant:scalac] /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/src/main/scala/org/apache/samza/config_deprecated/KafkaConfig.scala:322: warning: class ConsumerConfig in package consumer is deprecated: This class has been deprecated and will be removed in a future release. Please use org.apache.kafka.clients.consumer.ConsumerConfig instead.
+[ant:scalac]     new ConsumerConfig(consumerProps)
+[ant:scalac]         ^
+[ant:scalac] 21 warnings found
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+:samza-kafka_2.11:processResources UP-TO-DATE
+:samza-kafka_2.11:classes
+:samza-kafka_2.11:compileTestJava UP-TO-DATE
+:samza-kafka_2.11:compileTestScala
+[ant:scalac] Element '/home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kafka/build/resources/main' does not exist.
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+:samza-kafka_2.11:processTestResources UP-TO-DATE
+:samza-kafka_2.11:testClasses
+:samza-kafka_2.11:test
+:samza-kv_2.11:compileJava UP-TO-DATE
+:samza-kv_2.11:compileScalaNote: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kv/src/main/java/org/apache/samza/storage/kv/LocalTable.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-kv_2.11:processResources UP-TO-DATE
+:samza-kv_2.11:classes
+:samza-kv_2.11:jar
+:samza-kv-inmemory_2.11:compileJava UP-TO-DATE
+:samza-kv-inmemory_2.11:compileScala
+:samza-kv-inmemory_2.11:processResources UP-TO-DATE
+:samza-kv-inmemory_2.11:classes
+:samza-kv-inmemory_2.11:compileTestJava UP-TO-DATE
+:samza-kv-inmemory_2.11:compileTestScala
+[ant:scalac] Element '/home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kv-inmemory/build/resources/main' does not exist.
+Note: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kv-inmemory/src/test/java/org/apache/samza/storage/kv/inmemory/TestInMemoryTableDescriptor.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+:samza-kv-inmemory_2.11:processTestResources UP-TO-DATE
+:samza-kv-inmemory_2.11:testClasses
+:samza-kv-inmemory_2.11:test
+:samza-kv-rocksdb_2.11:compileJava UP-TO-DATE
+:samza-kv-rocksdb_2.11:compileScalaNote: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kv-rocksdb/src/main/java/org/apache/samza/storage/kv/RocksDbKeyValueReader.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-kv-rocksdb_2.11:processResources UP-TO-DATE
+:samza-kv-rocksdb_2.11:classes
+:samza-kv-rocksdb_2.11:compileTestJava UP-TO-DATE
+:samza-kv-rocksdb_2.11:compileTestScala
+[ant:scalac] Element '/home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kv-rocksdb/build/resources/main' does not exist.
+Note: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kv-rocksdb/src/test/java/org/apache/samza/storage/kv/descriptors/TestRocksDbTableDescriptor.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+:samza-kv-rocksdb_2.11:processTestResources UP-TO-DATE
+:samza-kv-rocksdb_2.11:testClasses
+:samza-kv-rocksdb_2.11:test
+:samza-kv_2.11:compileTestJava UP-TO-DATE
+:samza-kv_2.11:compileTestScala
+[ant:scalac] Element '/home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-kv/build/resources/main' does not exist.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+:samza-kv_2.11:processTestResources UP-TO-DATE
+:samza-kv_2.11:testClasses
+:samza-kv_2.11:test
+:samza-log4j2_2.11:compileJava
+Processing annotations
+Annotations processed
+Processing annotations
+No elements to process
+Note: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-log4j2/src/main/java/org/apache/samza/logging/log4j2/StreamAppender.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+:samza-log4j2_2.11:processResources UP-TO-DATE
+:samza-log4j2_2.11:classes
+:samza-log4j2_2.11:compileTestJava
+Processing annotations
+Annotations processed
+Processing annotations
+No elements to process
+:samza-log4j2_2.11:processTestResources
+:samza-log4j2_2.11:testClasses
+:samza-log4j2_2.11:test
+:samza-log4j_2.11:compileJavaNote: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-log4j/src/main/java/org/apache/samza/logging/log4j/StreamAppender.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-log4j_2.11:processResources UP-TO-DATE
+:samza-log4j_2.11:classes
+:samza-log4j_2.11:compileTestJava
+:samza-log4j_2.11:processTestResources
+:samza-log4j_2.11:testClasses
+:samza-log4j_2.11:test
+:samza-shell:compileJava UP-TO-DATE
+:samza-shell:processResources
+:samza-shell:classes
+:samza-shell:jar
+:samza-rest_2.11:compileJavaNote: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-rest/src/main/java/org/apache/samza/monitor/LocalStoreMonitor.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+:samza-rest_2.11:processResources
+:samza-rest_2.11:classes
+:samza-rest_2.11:compileTestJavaNote: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-rest/src/test/java/org/apache/samza/monitor/TestLocalStoreMonitor.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+:samza-rest_2.11:processTestResources UP-TO-DATE
+:samza-rest_2.11:testClasses
+:samza-rest_2.11:test
+:samza-shell:compileTestJava UP-TO-DATE
+:samza-shell:processTestResources UP-TO-DATE
+:samza-shell:testClasses UP-TO-DATE
+:samza-shell:test UP-TO-DATE
+:samza-azure_2.11:jar
+:samza-kafka_2.11:jar
+:samza-kv-inmemory_2.11:jar
+:samza-kv-rocksdb_2.11:jar
+:samza-sql_2.11:compileJavaNote: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-sql_2.11:processResources UP-TO-DATE
+:samza-sql_2.11:classes
+:samza-sql_2.11:jar
+:samza-tools_2.11:compileJavaNote: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+:samza-tools_2.11:processResources
+:samza-tools_2.11:classes
+:samza-tools_2.11:jar
+:samza-sql-shell_2.11:compileJavaNote: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-sql-shell/src/main/java/org/apache/samza/sql/client/impl/FileSystemAvroRelSchemaProviderFactory.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+:samza-sql-shell_2.11:processResources UP-TO-DATE
+:samza-sql-shell_2.11:classes
+:samza-sql-shell_2.11:compileTestJavaNote: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-sql-shell/src/test/java/org/apache/samza/sql/client/util/RandomAccessQueueTest.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-sql-shell_2.11:processTestResources
+:samza-sql-shell_2.11:testClasses
+:samza-sql-shell_2.11:test
+:samza-sql_2.11:compileTestJava/home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-sql/src/test/java/org/apache/samza/sql/fn/TestBuildOutputRecordUdf.java:85: warning: non-varargs call of varargs method with inexact argument type for last parameter;
+    buildOutputRecordUdf.execute(null);
+                                 ^
+  cast to Object for a varargs call
+  cast to Object[] for a non-varargs call and to suppress this warning
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+1 warning
+
+:samza-sql_2.11:processTestResources
+:samza-sql_2.11:testClasses
+:samza-sql_2.11:test
+:samza-hdfs_2.11:jar
+:samza-log4j2_2.11:jar
+:samza-log4j_2.11:jar
+:samza-test_2.11:compileJava UP-TO-DATE
+:samza-test_2.11:compileScalaNote: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-test_2.11:processResources
+:samza-test_2.11:classes
+:samza-test_2.11:compileTestJava UP-TO-DATE
+:samza-test_2.11:compileTestScalaNote: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-test_2.11:processTestResources UP-TO-DATE
+:samza-test_2.11:testClasses
+:samza-test_2.11:test
+:samza-tools_2.11:compileTestJava UP-TO-DATE
+:samza-tools_2.11:processTestResources UP-TO-DATE
+:samza-tools_2.11:testClasses UP-TO-DATE
+:samza-tools_2.11:test UP-TO-DATE
+:samza-yarn_2.11:compileTestJava UP-TO-DATE
+:samza-yarn_2.11:compileTestScalaNote: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: /home/cpttz/Documents/INSA/5IF/dd2480/labs/lab_4/samza-yarn/src/test/java/org/apache/samza/webapp/TestApplicationMasterRestClient.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:samza-yarn_2.11:processTestResources UP-TO-DATE
+:samza-yarn_2.11:testClasses
+:samza-yarn_2.11:test
+
+BUILD SUCCESSFUL
+
+Total time: 18 mins 58.432 secs
