@@ -126,89 +126,79 @@ The refactoring itself is documented by the git log.
 For each team member, how much time was spent in
 
 * Viktor 
-    1. plenary discussions/meetings;
+    1. Plenary discussions/meetings:
     
-    2. discussions within parts of the group;
+    2. Choosing project:
     
-    3. reading documentation;
+    3. Reading documentation:
     
-    4. configuration;
+    4. Setting up environment:
     
-    5. analyzing code/output;
+    5. Analyzing code:
     
-    6. writing documentation;
+    6. Writing documentation:
     
-    7. writing code;
-    
-    8. running code?
+    7. Writing code:
     
 * Cyril 
-    1. plenary discussions/meetings;
+    1. Plenary discussions/meetings:
     
-    2. discussions within parts of the group;
+    2. Choosing project:
     
-    3. reading documentation;
+    3. Reading documentation:
     
-    4. configuration;
+    4. Setting up environment:
     
-    5. analyzing code/output;
+    5. Analyzing code:
     
-    6. writing documentation;
+    6. Writing documentation:
     
-    7. writing code;
-    
-    8. running code?
+    7. Writing code:
     
 * Robin 
-    1. plenary discussions/meetings;
+    1. Plenary discussions/meetings: 10
     
-    2. discussions within parts of the group;
+    2. Choosing project: 8
     
-    3. reading documentation;
+    3. Reading documentation: 2
     
-    4. configuration;
+    4. Setting up environment: 1
     
-    5. analyzing code/output;
+    5. Analyzing code: 5
     
-    6. writing documentation;
+    6. Writing documentation: 3
     
-    7. writing code;
-    
-    8. running code?
+    7. Writing code: 1
     
 * Sara 
-    1. plenary discussions/meetings;
+    1. Plenary discussions/meetings:
     
-    2. discussions within parts of the group;
+    2. Choosing project:
     
-    3. reading documentation;
+    3. Reading documentation:
     
-    4. configuration;
+    4. Setting up environment:
     
-    5. analyzing code/output;
+    5. Analyzing code:
     
-    6. writing documentation;
+    6. Writing documentation:
     
-    7. writing code;
-    
-    8. running code?
+    7. Writing code:
     
 * Fredrik 
-    1. plenary discussions/meetings;
+    1. Plenary discussions/meetings:
     
-    2. discussions within parts of the group;
+    2. Choosing project:
     
-    3. reading documentation;
+    3. Reading documentation:
     
-    4. configuration;
+    4. Setting up environment:
     
-    5. analyzing code/output;
+    5. Analyzing code:
     
-    6. writing documentation;
+    6. Writing documentation:
     
-    7. writing code;
-    
-    8. running code?
+    7. Writing code:
 
 ## Overall experience
 Finding a suitable project that seemed doable was not a trivial task. After finding the Samza project and building it, understanding the project and the requirements of the refactoring was quite a challenge. 
@@ -218,8 +208,12 @@ Furthermore we learned that additional dependencies could be found within our pr
 
 We reached out to the community of the project in order to register as an assignee and within a day we were able to connect with the issue reporter (Cameron Lee). He seemed glad that we showed interest in the project and referred to Yi Pan who was able to register us on the project. The conversation can be found in the comment section: https://issues.apache.org/jira/browse/SAMZA-1935
 
-What are your main take-aways from this project? What did you learn?
-Is there something special you want to mention here?
+As for the refactoring, it was hard for all of us to work on the refactoring since it was only a few functions that needed to be moved in order to get the refaction to work. All of us put a lot of work into gathering knowledge about the project and how to do the refactoring, but we couldn't devide the actual refactoring.
+
+We learned that we probably should have gotten a larger refactoring project, but it's hard to get a view of how big a task is before you've spent a few hours looking into it. And that is something we didn't have time to do for several projects. 
+If we did, we'd probably still be reading through projects as we speak.
+
+
 
 Fredrik:
 
@@ -229,5 +223,4 @@ Sara:
 
 Cyril:
 
-Robin:
-
+Robin: I've learned it takes a long time to find a suitable project for this kind of task. There is a lot of code to read to get up to speed and realize how big the task actually is.
