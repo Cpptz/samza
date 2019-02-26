@@ -100,6 +100,10 @@ Before the refactoring a [Context](./samza-api/src/main/java/org/apache/samza/co
 
 After the refactoring the init method takes a [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object and a [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) object as input, creates a [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) object from the [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) but uses it for less calls than before. Now the [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) object is used when calling fetchObject and getStreamMetadataCache instead. The major difference however is that the [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) object received when calling getTaskContext on the [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object does not have to be casted to a [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java) object.
 
+The patch can be viewed using the following command line: 
+```bash
+git diff master..testing
+```
 
 ### Before
 ![](./images/before_class.png)
