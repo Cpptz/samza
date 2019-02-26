@@ -59,7 +59,9 @@ and is decoupled from TaskContextImpl.
 ## Existing test cases relating to refactored code
 
 ## The refactoring carried out
+Before the refactoring a Context object was given as input and called getTaskContext upon which returned a TaskContext object. This object wa then casted to a TaskContextImpl object to be able to use a couple of methods which did not even fit into the TaskContextImpl class. A new class, called JobContextMetaData was created, with some of the attributes and methods from the TaskContextImpl class. The attributes JobModel, StreamMetadataCache and Map<String, Object>, and the methods registerObject and fetchObject were moved. The methods getJobModel and getStreamMetadataCache were only copied and moved to the JobContextMetadata class, since the methods were needed to create a Context object. 
 
+After the refactoring the init method takes a Context object and a JobContextMetadata object as input, creates a TaskContext object from the context but uses it for less calls than before. Now the JobContextMetadata object is used when calling fetchObject and getStreamMetadataCache instead. The major difference however is that the TaskContext object received when calling getTaskContext on the Context object does not have to be casted to a TaskContextImpl object.
 
 
 ### Before
