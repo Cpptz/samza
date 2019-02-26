@@ -91,8 +91,24 @@ We created the helper class JobContextMetadata to pass operators internally.
 ## Existing test cases relating to refactored code
 
 ## The refactoring carried out
+Before the refactoring a Context object was given as input to the init method in the OperatorImpl class. On this object the method getTaskContext was called which returned a TaskContext object. This object was then casted to a TaskContextImpl object to be able to use four methods in the TaskContextImpl class. This methods do not belong to the public interface and are only used internally, which makes them unfit for the TaskContextImpl class. A new class, called JobContextMetaData was created, with some of the attributes and methods from the TaskContextImpl class. The attributes JobModel, StreamMetadataCache and Map<String, Object>, and the methods registerObject and fetchObject were moved. Creating a Context object requires the attributes JobModel and StreamMetadataCache. This means that the methods getJobModel and getStreamMetadataCache still are needed outside of the JobContextMetadata class. Therefore only copies of these methods were moved to [JobContextMetadata](./samza/samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java)
 
-(Link to) a UML diagram and its description
+After the refactoring the init method takes a Context object and a JobContextMetadata object as input, creates a TaskContext object from the context but uses it for less calls than before. Now the JobContextMetadata object is used when calling fetchObject and getStreamMetadataCache instead. The major difference however is that the TaskContext object received when calling getTaskContext on the Context object does not have to be casted to a TaskContextImpl object.
+
+
+### Before
+![](./images/before_class.png)
+
+
+![](./images/before_seq.png)
+
+
+### After
+![](./images/after_class.png)
+
+
+![](./images/after_seq.png)
+
 
 ## Test logs
 
