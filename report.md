@@ -53,8 +53,39 @@ The build as well as the tests conclude without any errors.
 
 ## Requirements affected by functionality being refactored
 
-We need to split up the internal functionality by creating a separate object which is only passed around internally 
-and is decoupled from TaskContextImpl.
+TaskContextImpl was split up by creating a separate object to decouple internally passed around objects from API. 
+
+We created the helper class JobContextMetadata to pass operators internally. 
+
+|  Name | JobContextMetadata | 
+|---|---|
+|Title| Fetching and assigning register objects|
+|Description| A helper class needed to pass operators internally.|
+
+|  Name | registerObject() | 
+|---|---|
+|Title| register object to registry |
+|Description| Takes a string and a object and writes it into the object registry |
+
+|  Name | fetchObject | 
+|---|---|
+|Title| fetches object from registry|
+|Description| Takes a string and object and returns the object from registry|
+
+|  Name | getJobModel | 
+|---|---|
+|Title| gets job model |
+|Description| returns the job model|
+
+|  Name | getStreamMetadataCache | 
+|---|---|
+|Title|get streamMetadataCache|
+|Description| returns streamMetadataCache|
+
+|  Name | TaskContextImpl | 
+|---|---|
+|Title| Gets context and shares it to all tasks within the container |
+|Description| Moved registerObject and fetchObject to not include access to object that are only used internally. getJobModel and getStreamMetadataCache is kept in TaskContextImpl in order to pass them on in the constructor of JobContextMetadata|
 
 ## Existing test cases relating to refactored code
 
