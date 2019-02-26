@@ -98,7 +98,7 @@ To run those three tests, use the following command line:
 ```bash
 ./gradlew clean :samza-core:test -Dtest.single=TestJobContextMetadata
 ./gradlew clean :samza-core:test -Dtest.single=TestOperatorImpl
-./gradlew clean :samza-core:test -Dtest.single=TestTaskContextImpl
+./gradlew clean :samza-core:test -Dtest.single=TestWindowOperator
 ```
 
 
@@ -132,9 +132,11 @@ git diff master..testing
 
 ## Test logs
 
-Overall results with link to a copy of the logs (before/after refactoring).
+Build was passing before as one can see in [BEFORE.log](./log/BEFORE.log).
 
-The refactoring itself is documented by the git log.
+Build is passing after the refractoring as one can see in [AFTER.log](./log/AFTER.log).
+
+One could also look at the Travis builds on `master` (before) and `testing` (after) branches.
 
 ## Effort spent
 
@@ -222,11 +224,6 @@ We spent a lot of time as a group discussing how to best approach the problem an
 Furthermore we learned that additional dependencies could be found within our project which would further complicate the refactoring. The experience of the given documentation was overall good, for example it was easy to build the project based on the documentation in the README.md. If anything was unclear, additional information could be found on their website: http://samza.apache.org/ 
 
 We reached out to the community of the project in order to register as an assignee and within a day we were able to connect with the issue reporter (Cameron Lee). He seemed glad that we showed interest in the project and referred to Yi Pan who was able to register us on the project. The conversation can be found in the comment section: https://issues.apache.org/jira/browse/SAMZA-1935
-
-As for the refactoring, it was hard for all of us to work on the refactoring since it was only a few functions that needed to be moved in order to get the refaction to work. All of us put a lot of work into gathering knowledge about the project and how to do the refactoring, but we couldn't devide the actual refactoring.
-
-We learned that we probably should have gotten a larger refactoring project, but it's hard to get a view of how big a task is before you've spent a few hours looking into it. And that is something we didn't have time to do for several projects. 
-If we did, we'd probably still be reading through projects as we speak.
 
 
 
