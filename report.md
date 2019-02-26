@@ -60,7 +60,21 @@ and is decoupled from TaskContextImpl.
 
 ## The refactoring carried out
 
-(Link to) a UML diagram and its description
+
+
+### Before
+![](./images/before_class.png)
+
+
+![](./images/before_seq.png)
+
+
+### After
+![](./images/after_class.png)
+
+
+![](./images/after_seq.png)
+
 
 ## Test logs
 
