@@ -231,7 +231,7 @@ Fredrik:
 
 Viktor:This assignment has taught me that to fully understand the scope of a project, you need more time that I previously though. It took a long time finding a suitable project and then uderstanding it before actually starting the refactoring. 
 
-Sara: 
+Sara: I got to see how much classes can depend on each other and that is can be really hard to just make a change which seems small. Although, the easier the change is to make, the better the code.
 
 Cyril:
 
