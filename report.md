@@ -143,19 +143,19 @@ One could also look at the Travis builds on `master` (before) and `testing` (aft
 For each team member, how much time was spent in
 
 * Viktor 
-    1. Plenary discussions/meetings:
+    1. Plenary discussions/meetings: 11
     
-    2. Choosing project:
+    2. Choosing project:8
     
-    3. Reading documentation:
+    3. Reading documentation:2
     
-    4. Setting up environment:
+    4. Setting up environment:1
     
-    5. Analyzing code:
+    5. Analyzing code:5
     
-    6. Writing documentation:
+    6. Writing documentation:2 
     
-    7. Writing code:
+    7. Writing code:1
     
 * Cyril 
     1. Plenary discussions/meetings:
@@ -229,7 +229,7 @@ We reached out to the community of the project in order to register as an assign
 
 Fredrik:
 
-Viktor:
+Viktor:This assignment has taught me that to fully understand the scope of a project, you need more time that I previously though. It took a long time finding a suitable project and then uderstanding it before actually starting the refactoring. 
 
 Sara:
 
