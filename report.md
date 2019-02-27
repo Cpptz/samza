@@ -87,29 +87,25 @@ We created the helper class JobContextMetadata to pass operators internally.
 |Title| Gets context and shares it to all tasks within the container |
 |Description| Moved registerObject and fetchObject to not include access to object that are only used internally. getJobModel and getStreamMetadataCache is kept in TaskContextImpl in order to pass them on in the constructor of JobContextMetadata|
 
-## Existing test cases relating to refactored code
-Firstly we added a new class `JobContextMetaData` to lift out some functionality from the class `TaskContextImpl`. Then we had to move the testing of this functionality from `TestTaskContextImpl` to a new testclass `TestJobContextMetaData`. In the new testclass, we test to register and fetch an object. So we register an object with a specific key, and we test so that we can fetch this object with that specific key. We also test so that the fetch function returns null if there is no key attached to an object.
-
-We have changed a bit to `TestOperatorImpl`. The context contains `TaskContextImpl` but since we lifted out functionality from the `TaskContextImpl` we had to add this back to the test. We did this by initiating a new `JobContextMetaData` which contains the functionality that we lifted out. So whenever we initiialize the context, we also initialize the JobContextMetaData. The reason why we create the `JobContextMetaData` with null arguments is that before, the testcase used a mock of `TaskContextImpl` without mocking the getters and the getters are obviously not used in this testcase.
-
-The last test we changed was in the `TestWindowOperator` testclass. The reason we changed this was that the mock was not necessary to test this functionality. Before, it worked like this. They initialized their testattributes with some key k1 and tried to retrieve the value with key k2 which does not work, so instead they mocked the fetch object method to pass the test. Now, we have changed the test so that we initialize the test attributes with correct attributes so that we dont need to mock the fetch object method.
-
-To run those three tests, use the following command line:
-```bash
-./gradlew clean :samza-core:test -Dtest.single=TestJobContextMetadata
-./gradlew clean :samza-core:test -Dtest.single=TestOperatorImpl
-./gradlew clean :samza-core:test -Dtest.single=TestWindowOperator
-```
-
-
 ## The refactoring carried out
-Before the refactoring a [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object was given as input to the init method in [OperatorImpl](./samza-core/src/main/java/org/apache/samza/operators/impl/OperatorImpl.java). On this object the method getTaskContext was called which returned a [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) object. This object was then casted to a [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java) object to be able to use four methods in [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java). This methods do not belong to the public interface and are only used internally, which makes them unfit for [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java). A new class, called [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) was created, with some of the attributes and methods from [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java). The attributes [JobModel](./samza-core/src/main/java/org/apache/samza/job/model/JobModel.java), [StreamMetadataCache](./samza-core/src/main/scala/org/apache/samza/system/StreamMetadataCache.scala) and Map<String, Object>, and the methods registerObject and fetchObject were moved. 
+Before the refactoring a [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object was given as input to the init method in [OperatorImpl](./samza-core/src/main/java/org/apache/samza/operators/impl/OperatorImpl.java). On this object the method getTaskContext was called which returned a [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) object. This object was then casted to a [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java) object to be able to use four methods in [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java). This methods do not belong to the public interface and are only used internally, which makes them unfit for [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java). A new class, called [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) was created, with some of the attributes and methods from [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java). The attributes [JobModel](./samza-core/src/main/java/org/apache/samza/job/model/JobModel.java), [StreamMetadataCache](./samza-core/src/main/scala/org/apache/samza/system/StreamMetadataCache.scala) and Map<String, Object>, and the methods registerObject and fetchObject were moved.
+ 
 
+The [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) is instantiated in the OperatorImplGraph and is passed to multiple OperatorImpl.
 
 
 The class [EmbeddedTaggedRateLimiter](./samza-core/src/main/java/org/apache/samza/util/EmbeddedTaggedRateLimiter.java) implements the public API [RateLimiter](./samza-api/src/main/java/org/apache/samza/util/RateLimiter.java), which has a method called init with a [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object as inparameter. This means that the [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object is the only source from which the [JobModel](./samza-core/src/main/java/org/apache/samza/job/model/JobModel.java) and the [StreamMetadataCache](./samza-core/src/main/scala/org/apache/samza/system/StreamMetadataCache.scala) can be fetched. Hence, the methods getJobModel and getStreamMetadataCache are needed outside of [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java). Therefore only copies of these methods were moved to [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java).
 
-After the refactoring the init method takes a [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object and a [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) object as input, creates a [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) object from the [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) but uses it for less calls than before. Now the [JobContextMetadata](./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) object is used when calling fetchObject and getStreamMetadataCache instead. The major difference however is that the [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) object received when calling getTaskContext on the [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) object does not have to be casted to a [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java) object.
+This means that the [StreamMetadataCache](./samza-core/src/main/scala/org/apache/samza/system/StreamMetadataCache.scala) and the [JobModel](./samza-core/src/main/java/org/apache/samza/job/model/JobModel.java) are created with the Context therefore the JobContextMetadata is initiated with the StreamMetadataCache and JobModel retrieved by calling getJobModel and getStreamMetadataCache on the TaskContextImpl, so there are still casts of the TaskContext to the TaskContextImpl.
+
+
+
+After the refractoring, the [JobContextMetadata](
+./samza-core/src/main/java/org/apache/samza/context/JobContextMetadata.java) 
+object is used when calling fetchObject and getStreamMetadataCache instead in the [OperatorImpl](./samza-core/src/main/java/org/apache/samza/operators/impl/OperatorImpl.java)
+The major difference however is that the [TaskContext](./samza-api/src/main/java/org/apache/samza/context/TaskContext.java) 
+object received when calling getTaskContext on the [Context](./samza-api/src/main/java/org/apache/samza/context/Context.java) 
+object does not have to be casted to a [TaskContextImpl](./samza-core/src/main/java/org/apache/samza/context/TaskContextImpl.java) object.
 
 The patch can be viewed using the following command line: 
 ```bash
@@ -128,6 +124,21 @@ git diff master..testing
 
 
 ![](./images/after_seq.png)
+
+
+## Existing test cases relating to refactored code
+Firstly we added a new class `JobContextMetaData` to lift out some functionality from the class `TaskContextImpl`. Then we had to move the testing of this functionality from `TestTaskContextImpl` to a new testclass `TestJobContextMetaData`. In the new testclass, we test to register and fetch an object. So we register an object with a specific key, and we test so that we can fetch this object with that specific key. We also test so that the fetch function returns null if there is no key attached to an object.
+
+We have changed a bit to `TestOperatorImpl`. The context contains `TaskContextImpl` but since we lifted out functionality from the `TaskContextImpl` we had to add this back to the test. We did this by initiating a new `JobContextMetaData` which contains the functionality that we lifted out. So whenever we initiialize the context, we also initialize the JobContextMetaData. The reason why we create the `JobContextMetaData` with null arguments is that before, the testcase used a mock of `TaskContextImpl` without mocking the getters and the getters are obviously not used in this testcase.
+
+The last test we changed was in the `TestWindowOperator` testclass. The reason we changed this was that the mock was not necessary to test this functionality. Before, it worked like this. They initialized their testattributes with some key k1 and tried to retrieve the value with key k2 which does not work, so instead they mocked the fetch object method to pass the test. Now, we have changed the test so that we initialize the test attributes with correct attributes so that we dont need to mock the fetch object method.
+
+To run those three tests, use the following command line:
+```bash
+./gradlew clean :samza-core:test -Dtest.single=TestJobContextMetadata
+./gradlew clean :samza-core:test -Dtest.single=TestOperatorImpl
+./gradlew clean :samza-core:test -Dtest.single=TestWindowOperator
+```
 
 
 ## Test logs
@@ -158,19 +169,19 @@ For each team member, how much time was spent in
     7. Writing code:1
     
 * Cyril 
-    1. Plenary discussions/meetings:
+    1. Plenary discussions/meetings: 11
     
-    2. Choosing project:
+    2. Choosing project: 8
     
-    3. Reading documentation:
+    3. Reading documentation: 1
     
-    4. Setting up environment:
+    4. Setting up environment: 1 
     
-    5. Analyzing code:
+    5. Analyzing code: 5
     
-    6. Writing documentation:
+    6. Writing documentation: 2 
     
-    7. Writing code:
+    7. Writing code: 8
     
 * Robin 
     1. Plenary discussions/meetings: 10
@@ -233,6 +244,5 @@ Viktor:This assignment has taught me that to fully understand the scope of a pro
 
 Sara:
 
-Cyril:
 
 Robin: I've learned it takes a long time to find a suitable project for this kind of task. There is a lot of code to read to get up to speed and realize how big the task actually is.
