@@ -188,19 +188,19 @@ For each team member, how much time was spent in
     7. Writing code: 1
     
 * Sara 
-    1. Plenary discussions/meetings:
+    1. Plenary discussions/meetings: 7
     
-    2. Choosing project:
+    2. Choosing project: 8
     
-    3. Reading documentation:
+    3. Reading documentation: 3
     
-    4. Setting up environment:
+    4. Setting up environment: 2
     
-    5. Analyzing code:
+    5. Analyzing code: 4
     
-    6. Writing documentation:
+    6. Writing documentation: 2
     
-    7. Writing code:
+    7. Writing code: 4
     
 * Fredrik 
     1. Plenary discussions/meetings:
@@ -231,7 +231,7 @@ Fredrik:
 
 Viktor:This assignment has taught me that to fully understand the scope of a project, you need more time that I previously though. It took a long time finding a suitable project and then uderstanding it before actually starting the refactoring. 
 
-Sara:
+Sara: 
 
 Cyril:
 
