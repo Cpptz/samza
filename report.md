@@ -199,34 +199,34 @@ For each team member, how much time was spent in
     7. Writing code: 1
     
 * Sara 
-    1. Plenary discussions/meetings:
+    1. Plenary discussions/meetings: 7
     
-    2. Choosing project:
+    2. Choosing project: 8
     
-    3. Reading documentation:
+    3. Reading documentation: 3
     
-    4. Setting up environment:
+    4. Setting up environment: 2
     
-    5. Analyzing code:
+    5. Analyzing code: 4
     
-    6. Writing documentation:
+    6. Writing documentation: 2
     
-    7. Writing code:
+    7. Writing code: 4
     
 * Fredrik 
-    1. Plenary discussions/meetings:
+    1. Plenary discussions/meetings: 9
     
-    2. Choosing project:
+    2. Choosing project: 8
     
-    3. Reading documentation:
+    3. Reading documentation: 2
     
-    4. Setting up environment:
+    4. Setting up environment: 2
     
-    5. Analyzing code:
+    5. Analyzing code: 4
     
-    6. Writing documentation:
+    6. Writing documentation: 3
     
-    7. Writing code:
+    7. Writing code: 1
 
 ## Overall experience
 Finding a suitable project that seemed doable was not a trivial task. After finding the Samza project and building it, understanding the project and the requirements of the refactoring was quite a challenge. 
@@ -238,11 +238,11 @@ We reached out to the community of the project in order to register as an assign
 
 
 
-Fredrik:
+Fredrik: Well I've learned that finding projects which are understandable and doable can be really hard. Also how things that doesnt seem to depend on each other and how they actually can depend on each other.
 
 Viktor:This assignment has taught me that to fully understand the scope of a project, you need more time that I previously though. It took a long time finding a suitable project and then uderstanding it before actually starting the refactoring. 
 
-Sara:
+Sara: I got to see how much classes can depend on each other and that is can be really hard to just make a change which seems small. Although, the easier the change is to make, the better the code.
 
 
 Robin: I've learned it takes a long time to find a suitable project for this kind of task. There is a lot of code to read to get up to speed and realize how big the task actually is.
